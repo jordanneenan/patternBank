@@ -16,10 +16,6 @@
             }
         ?>
 
-
-
-
-
         <meta name="viewport" content="user-scalable=0, width=device-width, initial-scale=1.0,  minimum-scale=1.0, maximum-scale=1.0">
         <meta name="format-detection" content="telephone=no">
 
@@ -64,7 +60,19 @@
 
             <!-- Header options - Absolutely position the header with absolute_pos - this is used when the container below the nav sets its height using 100vh...like a full screen carousel on the home page -->
 
-            <header class="underline horizontal_scroll cfx">
+        <?php
+            //get the slug of the current page
+            global $post;
+            $post_slug=$post->post_name;
+
+            //check if the page is the home page or the style guide and add the absolute_pos classname
+            $absPos = '';
+            if(is_home() || $post_slug == 'style-guide'){
+                $absPos = 'absolute_pos';
+            } 
+        ?>
+
+            <header class="underline horizontal_scroll cfx <?php echo $absPos; ?>">
                 <div class="logo">
                     <a href="/">
                         <!-- <img src="<?php echo $GLOBALS['pathImg']; ?>logo.png" alt=""> -->

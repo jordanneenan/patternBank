@@ -1,0 +1,186 @@
+nav{
+	float: right;
+
+	ul{
+		padding: 0;
+
+		&:after{
+			visibility: hidden;
+			display: block;
+			font-size: 0;
+			content: " ";
+			clear: both;
+			height: 0;
+		}
+	}
+
+	li{
+		float: left;
+	}
+
+	a{
+		color: $white;
+		display: block;
+		padding: 28px 10px;
+	    transition: all 400ms ease-out;
+    	transition-property: height, background, color, opacity;
+
+		&:hover{
+			color: $white;
+			opacity: 0.7;
+		}
+	}
+
+	.current-menu-item a{
+		opacity: 0.7;
+	}
+}
+
+.nav_grad{
+	display: none;
+}
+
+.underline{
+	nav{
+		a{
+			position: relative;
+			margin: 0 9px;
+			padding: 28px 1px;
+
+			&:after{
+				opacity: 0;
+				background-color: $grey;
+				display: block;
+				width: 100%;
+				height: 0px;
+				position: absolute;
+				bottom: 0;
+				content: " ";
+				transition: all $transitionTime ease;
+			}
+		}
+
+		a:hover, .current-menu-item a{
+			&:after{
+				opacity: 1;
+				height: 8px;
+			}
+		}
+	}
+}
+
+.solid_bg{
+	nav{
+		a:hover, .current-menu-item a{
+			background-color: $grey;
+			opacity: 1;
+		}
+	}
+}
+
+@media only screen and (max-width: $navBreak ){
+	.slide_down, .slide_down.underline{
+		nav{
+			float: none;
+			text-align: center;
+			background-color: #464646;
+
+			ul{
+				display: none;
+				width: 100%;
+				padding: 14px 0;
+			}
+
+			li{
+				float: none;
+			}
+
+			a{
+				margin: 0;
+				padding: 14px 0;
+				font-size: 1.1em;
+
+				&:after{
+					display: none !important;
+				}
+			}
+
+			.current-menu-item a, a:hover{
+				opacity: 1;
+				background-color: $grey;
+			}
+		}
+	}
+
+	.horizontal_scroll, .horizontal_scroll.underline, .horizontal_scroll.solid_bg{
+		nav{
+			position: relative;
+
+			ul{
+				display: block;
+				padding: 0 8px;
+			}
+
+			li{
+				padding: 0 12px;
+			}
+
+			a{
+				margin: 0;
+				padding: 2px 0 4px;
+				background-color: transparent;
+
+				&:after{
+					height: 2px;
+				}
+			}
+
+			&.h_scroll{
+				background-color: #464646;
+
+				a{
+					padding: 13px 0 15px;
+				}
+			}
+		}
+
+		.nav_grad.h_scroll{
+			display: block;
+			position: absolute;
+			width: 90px;
+			right: 0;
+			top: 0;
+			z-index: 1;
+			pointer-events: none;
+
+			$startColourGrad: transparent;
+			$endColourGrad: #333;
+			background: -moz-linear-gradient(left, $startColourGrad 0%, $endColourGrad 100%); 
+			background: -webkit-gradient(linear, left top, right top, color-stop(0%,$startColourGrad), color-stop(100%,$endColourGrad));
+			background: -webkit-linear-gradient(left,$startColourGrad 0%, rgba(51,51,51,0.05) 5%,rgba(51,51,51,0.5) 50%,rgba(51,51,51,0.75) 75%,$endColourGrad 100%); 
+			background: -o-linear-gradient(left, $startColourGrad 0%,$endColourGrad 100%); 
+			background: -ms-linear-gradient(left, $startColourGrad 0%,$endColourGrad 100%); 
+			background: linear-gradient(to right, $startColourGrad 0%, rgba(51,51,51,0.05) 5%,rgba(51,51,51,0.5) 50%,rgba(51,51,51,0.75) 75%,$endColourGrad 100%); 
+		}
+	}
+
+	nav.h_scroll{
+		overflow: hidden;
+		overflow-x: auto;
+		float: none;
+
+		ul{
+			scroll: auto;
+		}
+	}
+}
+
+@media only screen and (min-width: ($navBreak + 1) ){
+	.slide_down{
+		nav{
+			ul{
+				display: block !important;
+			}
+		}
+	}
+}

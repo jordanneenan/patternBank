@@ -1,0 +1,57 @@
+//mixin to creat a linear gradient
+@mixin createGradient($startColour, $endColour){
+
+	/* FF3.6+ */ 
+	background: -moz-linear-gradient(top, $startColour 0%, $endColour 100%); 
+
+	/* Chrome,Safari4+ */ 
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$startColour), color-stop(100%,$endColour));
+
+	/* Chrome10+,Safari5.1+ */ 
+	background: -webkit-linear-gradient(top,transparent 0%,$startColour 5%,$endColour 100%); 
+
+	/* Opera 11.10+ */ 
+	background: -o-linear-gradient(top, $startColour 0%,$endColour 100%); 
+
+	/* IE10+ */ 
+	background: -ms-linear-gradient(top, $startColour 0%,$endColour 100%); 
+
+	/* W3C */ 
+	background: linear-gradient(to bottom, transparent 0%, $startColour 5%,$endColour 100%); 
+
+	/* Older IE */
+	//filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6f1f2f2',GradientType=0 );
+
+}
+
+//mixin to created rounded corners
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+  background-clip: padding-box;  /* stops bg color from leaking outside the border: */
+}
+
+//mixin to set placeholder copy colour in form fields
+//mixin to set placeholder copy colour in form fields
+@mixin placeholderColor($color){
+	&:placeholder{
+		color: $color !important;
+	}
+
+	&::-webkit-input-placeholder {
+	   color: $color !important;
+	}
+
+	&:-moz-placeholder { /* Firefox 18- */
+	   color: $color !important;  
+	}
+
+	&::-moz-placeholder {  /* Firefox 19+ */
+	   color: $color !important;  
+	}
+
+	&:-ms-input-placeholder {  
+	   color: $color !important;  
+	}
+}
+//usage: @include placeholderColor($primaryHighlight);

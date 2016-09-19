@@ -1,0 +1,1 @@
+function getArticles(n){}$(document).ready(function(){});

@@ -1,0 +1,85 @@
+.banner{
+	position: relative;
+	height: 600px;
+	color: $white;
+	background-size: cover !important;
+	text-align: center;
+
+	h1, h2, p, a{
+		max-width: 580px;
+		margin: 0 auto;
+		padding: 0 20px;
+		letter-spacing: 0.03em;
+	}
+
+	h1{
+		font-weight: 200;
+		font-size: 48px;
+		padding-bottom: 20px;
+		margin-top: -20px;
+	}
+
+	p{
+		font-size: 20px;
+		font-weight: 200;
+		line-height: 1.6em;
+	}
+
+	.button{
+		margin-top: 40px;
+	}
+
+	&_container{
+		display: table;
+		position: absolute;
+		height: 100%;
+		width: 100%;
+	}
+
+	&_align{
+		display: table-cell;
+		vertical-align: middle;
+	}
+
+	&.left_align{
+		text-align: left;
+
+		.banner_content{
+			max-width: $contentConstraint;
+			text-align: left;
+			margin: 0 auto;
+		}
+
+		h1, h2, p, a{
+			margin: 0;
+		}
+
+		.button{
+			margin: 40px 20px 0;
+		}
+	}
+}
+
+@media only screen and (max-width:767px){
+	.banner{
+		h1, h2, p, a{
+			letter-spacing: 0;
+			max-width: 600px;
+		}
+
+		h1{
+			font-size: 38px;
+			padding-bottom: 12px;
+		}
+
+		p{
+			font-size: 16px;
+			line-height: 1.4em;
+		}
+
+		.button{
+			padding: 10px 20px;
+			margin: 40px auto 0;
+		}
+	}
+}

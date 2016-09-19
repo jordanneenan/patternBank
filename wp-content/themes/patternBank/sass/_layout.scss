@@ -1,0 +1,26 @@
+$gutterHalf: ( $gutter / 2 );
+$gutterDouble: ( $gutter * 2 );
+
+$spacingQuarter: ( $spacing / 4 );
+$spacingHalf: ( $spacing / 2 );
+$spacingDouble: ( $spacing * 2 );
+$spacingTriple: ( $spacing * 3 );
+
+.global_container{
+	width: 100%;
+	max-width: $siteWidth;
+	margin: 0 auto;
+}
+
+.row{
+	width: 100%;
+	max-width: $rowWidth;
+	margin: 0 auto;
+}
+
+.content_container{
+	width: 100%;
+	max-width: $contentConstraint + ($gutter * 2);
+	margin: 0 auto;
+	padding: 0 $gutter;
+}

@@ -1,0 +1,8 @@
+a{
+	color: $primary;
+	transition: all $transitionTime ease;
+
+	&:hover{
+		color: $primaryShadow;
+	}
+}

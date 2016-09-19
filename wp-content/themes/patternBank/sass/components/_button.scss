@@ -1,0 +1,16 @@
+.button{
+	transition: all $transitionTime ease;
+	border: 1px solid $white;
+	padding: 13px 20px !important;
+	display: block;
+	max-width: 265px !important;
+	margin: 60px auto 0;
+	color: $white;
+	text-transform: uppercase;
+	text-align: center;
+
+	&:hover{
+		background-color: $white;
+		color: $black;
+	}
+}

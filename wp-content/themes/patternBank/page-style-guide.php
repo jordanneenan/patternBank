@@ -11,6 +11,7 @@
 <!-- CAROUSEL -->
 <?php
 	include_once(ABSPATH .'wp-content/themes/patternBank/rows/carousel/carousel.php');
+	callCarousel(get_queried_object_id());
 ?>
 <!-- /CAROUSEL -->
 

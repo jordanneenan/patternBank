@@ -13,4 +13,14 @@
 		background-color: $white;
 		color: $black;
 	}
+
+	&.black{
+		color: $black;
+		border-color: $darkGrey;
+
+		&:hover{
+			background-color: $darkGrey;
+			color: $white;
+		}
+	}
 }

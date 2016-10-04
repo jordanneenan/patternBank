@@ -10,19 +10,28 @@
 
 <!-- CAROUSEL -->
 <?php
-	include_once(ABSPATH .'wp-content/themes/patternBank/rows/carousel/carousel.php');
-	callCarousel(get_queried_object_id());
+	// include_once(ABSPATH .'wp-content/themes/patternBank/rows/carousel/carousel.php');
+	// callCarousel(get_queried_object_id());
 ?>
 <!-- /CAROUSEL -->
 
 <!-- BANNER -->
 <?php
-	//include_once(ABSPATH .'wp-content/themes/patternBank/rows/banner/banner.php');
+	include_once(ABSPATH .'wp-content/themes/patternBank/rows/banner/banner.php');
+	callBanner(get_queried_object_id());
 ?>
 <!-- /BANNER -->
 
+<!-- GENERAL MODULE -->
+<?php
+	include_once(ABSPATH .'wp-content/themes/patternBank/rows/general_module/general_module.php');
+	callGeneralModule();
+?>
+<!-- /GENERAL MODULE -->
+
 	<div class="row">
 		<div class="content_container">
+
 			<h1><?php the_title(); ?></h1>
 <?php 
 	if ( have_posts() ) {
@@ -36,8 +45,8 @@
 	</div>
 
 <?php
-	include_once(ABSPATH .'wp-content/themes/patternBank/editor/editor.php');
-	addEditor();
+	// include_once(ABSPATH .'wp-content/themes/patternBank/editor/editor.php');
+	// addEditor();
 ?>
 
 <!-- COLOUR PALETTE -->
@@ -99,6 +108,7 @@
 <!-- COLLAPSABLE TEXT -->
 <?php
 	include_once(ABSPATH .'wp-content/themes/patternBank/rows/collapsable_copy/collapsable_copy.php');
+	callCollapsedCopy();
 ?>
 <!-- /COLLAPSABLE TEXT -->
 

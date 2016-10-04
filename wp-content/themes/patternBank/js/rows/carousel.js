@@ -10,5 +10,4 @@ $(document).ready(function(){
 	    fade: true,
 	    speed: 1000
 	  });
-
 });

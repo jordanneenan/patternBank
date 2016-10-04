@@ -1,0 +1,145 @@
+$gmMargin: 10px;
+$gmPadding: 30px;
+
+.general_modules{
+	margin-left: -$gmMargin;
+	margin-right: -$gmMargin;
+
+	padding: 80px 0 40px;
+
+	h2{
+		margin: 0 $gmPadding 6px;
+	}
+
+	.image{
+		margin-bottom: 18px;
+		position: relative;
+
+		img{
+			display: block;
+			width: 100%;
+		}
+	}
+
+	.content{
+		color: $darkGrey;
+		padding: 0 $gmPadding;
+
+		span{
+			text-transform: uppercase;
+			font-size: 12px;
+		}
+
+		h2{
+			color: $black;
+			margin: 0 0 10px;
+		}
+
+		h3, p{
+			margin: 0 0 12px;
+		}
+	}
+
+	.button{
+		margin: 36px $gmPadding 0;
+	}
+
+	&.center_align{
+		text-align: center;
+
+		.button{
+			margin: 36px auto 0;
+		}
+	}
+}
+
+.gm_thirds{
+	.general_module{
+		float: left;
+		width: 100%;
+		max-width: (100% / 3);
+	}
+}
+
+.general_module{
+	margin: 0 0 20px;
+
+	.image_content{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		transition: all $transitionTime ease;
+
+		.image_heading{
+			color: $white;
+			text-align: center;
+		}
+	}
+}
+
+.general_module_inner{
+	display: block;
+	margin: 0 $gmMargin;
+	padding: 0 0 $gmPadding;
+	background-color: $lightGrey;
+	color: $black;
+
+	&:hover{
+		color: $black;
+	}
+}
+
+@media only screen and (max-width:1000px){
+	$gmMargin: 5px;
+	$gmPadding: 20px;
+
+	.general_modules{
+		margin-left: -$gmMargin;
+		margin-right: -$gmMargin;
+
+		h2{
+			margin: 0 $gmPadding 6px;
+		}
+
+		.content{
+			padding: 0 $gmPadding;
+		}
+
+		.button{
+			margin: 36px $gmPadding 0;
+		}
+	}
+
+	.general_module_inner{
+		margin: 0 $gmMargin;
+	}
+}
+
+@media only screen and (max-width:880px){
+	.gm_thirds{
+		.general_module{
+			max-width: (100% / 2);
+		}
+	}
+}
+
+@media only screen and (max-width:650px){
+	$gmMargin: 0;
+
+	.general_modules{
+		margin-left: $gmMargin;
+		margin-right: $gmMargin;
+	}
+
+	.general_module_inner{
+		margin: 0 $gmMargin;
+	}
+
+	.gm_thirds{
+		.general_module{
+			max-width: 100%;
+			float: none
+		}
+	}
+}

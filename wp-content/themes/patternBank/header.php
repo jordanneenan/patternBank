@@ -38,6 +38,7 @@
 
         <script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/vendor/modernizr-3.3.1.min.js'></script>
         <script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/rows/carousel/slick/slick.min.js'></script>
+        <script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/vendor/masonry.js'></script>
 
         <script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/main.js'></script>
         <script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/plugins.js'></script>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="66px" height="66px" viewBox="0 0 66 66" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.1 (33804) - http://www.bohemiancoding.com/sketch -->
+    <title>Play Button</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="General-Module---Desktop---example-1" transform="translate(-191.000000, -176.000000)">
+            <g id="Module-1" transform="translate(40.000000, 80.000000)">
+                <g id="Play-Button" transform="translate(152.000000, 97.000000)">
+                    <g id="Group">
+                        <circle id="Oval" stroke="#FFFFFF" stroke-width="2" cx="32" cy="32" r="32"></circle>
+                        <polygon id="Triangle-2" fill="#FFFFFF" points="22 46.6315789 22 17.6842105 44 32.1578947"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

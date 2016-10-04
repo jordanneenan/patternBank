@@ -2,8 +2,6 @@
 function callCarousel($pageID){
 ?>
 
-<!-- Carousel settings - left_align will align the content left -->
-
 <?php
 
 // check if the repeater field has rows of data
@@ -12,6 +10,8 @@ if( have_rows('slides', $pageID) ):
 
 	<div class="row">
 		<script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/rows/carousel.js'></script>
+
+		<!-- Carousel settings - left_align will align the content left -->
 		<div class="carousel">
 
 <?php
@@ -50,7 +50,6 @@ if( have_rows('slides', $pageID) ):
 
 <?php
 
-
     endwhile;
 ?>
 		</div>
@@ -60,11 +59,6 @@ if( have_rows('slides', $pageID) ):
 endif;
 
 ?>
-
-
-
-		
-
 
 <?php
 }

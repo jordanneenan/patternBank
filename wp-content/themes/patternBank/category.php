@@ -8,7 +8,8 @@
 
 <!-- BANNER -->
 <?php
-	include_once(ABSPATH .'wp-content/themes/patternBank/rows/banner/banner.php');
+	// include_once(ABSPATH .'wp-content/themes/patternBank/rows/banner/banner.php');
+	// callBanner(get_queried_object_id());
 ?>
 <!-- /BANNER -->
 
@@ -19,13 +20,6 @@
 
 <div class="row">
 		<div class="content_container">
-
-
-
-
-
-
-
 
 
 <?php $args = array(
@@ -40,16 +34,6 @@ $cats = get_categories($args); ?>
 	echo $output;
 } ?>
 </ul>
-
-
-
-
-
-
-
-
-
-
 
 
 <?php

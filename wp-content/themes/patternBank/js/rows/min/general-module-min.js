@@ -1,0 +1,1 @@
+$(document).ready(function(){$(".equal_height").length&&matchHeight($(".equal_height .content")),$(".masonry").length&&$(".masonry").masonry({itemSelector:".general_module",columnWidth:".general_module"})});

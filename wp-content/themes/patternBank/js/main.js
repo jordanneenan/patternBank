@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+	//call functions
+	vAlign();
+
 	//Replace all SVG images with inline SVG
 	$('img.svg').each(function(){
 	    var $img = $(this);
@@ -34,6 +37,9 @@ $(window).resize(function() {
     if (timeout === false) {
         timeout = true;
         setTimeout(resizeend, delta);
+
+        $('.equal_height .content').css('height', 'auto');
+        $('.v-align').css({'paddingTop': 0, 'opacity': 0});
     }
 });
 
@@ -44,5 +50,32 @@ function resizeend() {
         timeout = false;
         if($('.collapsable_toggle').length){collapsableCopy();}
         if($('.horizontal_scroll').length){scrollNav();}
+        if($('.equal_height').length){matchHeight($('.equal_height .content'));}
+        if($('.v-align').length){vAlign();}
     }               
+}
+
+//vertically align element to the middle of its parent
+function vAlign(){
+  if(jQuery('.v-align').length){
+    var jQueryvaChild = jQuery('.v-align');
+    jQueryvaChild.each(function(){
+      var vaChildHeight = jQuery(this).height();
+      var vaParentHeight = jQuery(this).parent().height();
+      var topOffset = (vaParentHeight - vaChildHeight) / 2;
+      $(this).css({'paddingTop': topOffset, opacity: 1}).addClass('show');
+    });
+  }
+}
+
+//match height of elements
+function matchHeight($element) {
+    var heighest = 0;
+    $element.each(function () {
+        var elemHeight = $(this).outerHeight();
+        if (elemHeight > heighest) {
+            heighest = elemHeight;
+        }
+    });
+    $element.css('height', heighest);
 }

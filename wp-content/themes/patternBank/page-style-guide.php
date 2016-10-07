@@ -22,12 +22,14 @@
 ?>
 <!-- /BANNER -->
 
-<!-- GENERAL MODULE -->
+<!-- Image copy -->
 <?php
-	include_once(ABSPATH .'wp-content/themes/patternBank/rows/general_module/general_module.php');
-	callGeneralModule();
+	include_once(ABSPATH .'wp-content/themes/patternBank/rows/image_copy/image_copy.php');
+
+	callImageCopy('image_copy', 'default', 'full-width');
+
 ?>
-<!-- /GENERAL MODULE -->
+<!-- /Image copy -->
 
 	<div class="row">
 		<div class="content_container">

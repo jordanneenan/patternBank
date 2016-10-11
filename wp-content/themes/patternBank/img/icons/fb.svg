@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.2 (33826) - http://www.bohemiancoding.com/sketch -->
+    <title>Facebook_40x40</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0.06 40 40 40 40 0.04 0.06 0.04"></polygon>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="footer_mobile_default_v1" transform="translate(-90.000000, -50.000000)">
+            <g id="Social-Media-Icons-Copy">
+                <g transform="translate(90.000000, 50.000000)">
+                    <g id="Facebook_40x40">
+                        <g id="Group-3">
+                            <mask id="mask-2" fill="white">
+                                <use xlink:href="#path-1"></use>
+                            </mask>
+                            <g id="Clip-2"></g>
+                            <path d="M40,20 C40,31.046 31.046,40 20,40 C8.954,40 0,31.046 0,20 C0,8.954 8.954,0 20,0 C31.046,0 40,8.954 40,20" id="Fill-1" fill="#B8B8B4" mask="url(#mask-2)"></path>
+                        </g>
+                        <path d="M21.542,16.553 L21.542,14.83 C21.542,14.571 21.553,14.371 21.577,14.229 C21.602,14.088 21.656,13.948 21.742,13.81 C21.827,13.673 21.964,13.578 22.154,13.525 C22.344,13.473 22.597,13.447 22.912,13.447 L24.636,13.447 L24.636,10 L21.881,10 C20.287,10 19.142,10.378 18.447,11.135 C17.751,11.891 17.403,13.005 17.403,14.478 L17.403,16.553 L15.34,16.553 L15.34,20 L17.403,20 L17.403,30 L21.542,30 L21.542,20 L24.296,20 L24.66,16.553 L21.542,16.553" id="Fill-4" fill="#222321"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

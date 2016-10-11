@@ -28,19 +28,19 @@ var scrollNav = function(){
 	var pageWidth = $(window).width();
 	var navWidth = 30;
 
-	$('nav li').each(function(){
+	$('nav.main_page_navigation li').each(function(){
 		itemWidth = $(this).outerWidth() + 1;
 		navWidth = navWidth + itemWidth;
 	});
 
 	if(pageWidth < navWidth){
-		$('nav, .nav_grad').addClass('h_scroll');
-		$('nav ul').css('minWidth', navWidth);
+		$('nav.main_page_navigation, .nav_grad').addClass('h_scroll');
+		$('nav.main_page_navigation ul').css('minWidth', navWidth);
 	}else{
-		$('nav, .nav_grad').removeClass('h_scroll');
+		$('nav.main_page_navigation, .nav_grad').removeClass('h_scroll');
 	}
 
-	var navHeight = $('nav').outerHeight();
-	var navOffset = $('nav').offset();
+	var navHeight = $('nav.main_page_navigation').outerHeight();
+	var navOffset = $('nav.main_page_navigation').offset();
 	$('.nav_grad').css({'height': navHeight, 'top': navOffset.top});
 }

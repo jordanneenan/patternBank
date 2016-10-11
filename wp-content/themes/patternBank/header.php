@@ -39,6 +39,7 @@
         <script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/vendor/modernizr-3.3.1.min.js'></script>
         <script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/rows/carousel/slick/slick.min.js'></script>
         <script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/vendor/masonry.js'></script>
+        <script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/vendor/smoothScroll.js'></script>
 
         <script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/main.js'></script>
         <script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/plugins.js'></script>
@@ -87,7 +88,7 @@
                     <div class="line line-3"></div>
                 </div>
 
-                <nav>
+                <nav class="main_page_navigation">
                     <?php wp_nav_menu( array( 'theme_location' => 'main_nav', 'sort_column' => 'menu_order', 'container_class' => 'page-nav' ) ); ?>
                 </nav>
                 <div class="nav_grad"></div>

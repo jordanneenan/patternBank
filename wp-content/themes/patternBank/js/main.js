@@ -26,7 +26,18 @@ $(document).ready(function(){
 	        // Replace image with new SVG
 	        $img.replaceWith($svg);
 	    });
-	});	
+	});
+
+    //Give the navigation itims with this class the ability to smooth scroll
+    $('.scroll-link a').each(function() {
+        $(this).attr('data-scroll', '');
+    });
+
+    smoothScroll.init({
+        speed: 1500,
+        offset: 0,
+        callback: function () {if($('#fieldName').length){$('#fieldName').focus();}}
+    });
 });
 
 var rtime;
@@ -57,11 +68,11 @@ function resizeend() {
 
 //vertically align element to the middle of its parent
 function vAlign(){
-  if(jQuery('.v-align').length){
-    var jQueryvaChild = jQuery('.v-align');
-    jQueryvaChild.each(function(){
-      var vaChildHeight = jQuery(this).height();
-      var vaParentHeight = jQuery(this).parent().height();
+  if($('.v-align').length){
+    var $vaChild = $('.v-align');
+    $vaChild.each(function(){
+      var vaChildHeight = $(this).height();
+      var vaParentHeight = $(this).parent().height();
       var topOffset = (vaParentHeight - vaChildHeight) / 2;
       $(this).css({'paddingTop': topOffset, opacity: 1}).addClass('show');
     });

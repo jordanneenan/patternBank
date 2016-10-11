@@ -1,0 +1,134 @@
+.form_row{
+	text-align: center;
+	padding: 60px 0;
+
+	.copy{
+		max-width: 550px;
+		margin: 0 auto;
+
+		h2{
+			margin: 0 0 20px;
+		}
+
+		p{
+			margin: 0 0 40px;
+			font-size: 20px;
+			font-weight: 300;
+		}
+	}
+}
+
+form{
+	max-width: 550px;
+	margin: 0 auto;
+	position: relative;
+
+	input, textarea{
+		border: 0;
+		background-color: $lightGrey;
+		padding: 14px 10px !important;
+		@include placeholderColor($grey);
+		color: $black;
+	}
+}
+
+.gform_wrapper ul.gform_fields li.gfield{
+	padding-right: 0 !important;
+	margin: 0 0 10px !important;
+}
+
+.gfield_label{
+	display: none !important;
+}
+
+.gform_confirmation_message{
+	max-width: 550px;
+	padding: 20px;
+	color: $darkGrey;
+	text-align: center;
+	margin: 0 auto;
+	background-color: $lightGrey;
+	border: 1px solid $grey;
+	font-size: 20px;
+	line-height: 1.4em;
+}
+
+.gform_button{
+	transition: all $transitionTime ease;
+	border: 1px solid $black;
+	padding: 13px 20px !important;
+	display: block !important;
+	width: 100% !important;
+	max-width: 265px !important;
+	margin: 0 auto 0 !important;
+	color: $black;
+	text-transform: uppercase;
+	text-align: center;
+	background-color: transparent;
+
+	&:hover{
+		background-color: $black;
+		color: $white;
+	}
+}
+
+.gform_ajax_spinner{
+	display: block;
+	position: absolute;
+	bottom: 17px;
+	right: 50%;
+	margin-right: -75px;
+	background-color: $white;
+	border-radius: 30px;
+	width: 35px;
+	height: 35px;
+	text-align: center;
+	padding: 10px 10px 10px 0;
+}
+
+.form_row.dark{
+	background-color: $black;
+	color: $white;
+
+	.gform_button{
+		transition: all $transitionTime ease;
+		border: 1px solid $white;
+		padding: 13px 20px !important;
+		display: block !important;
+		width: 100% !important;
+		max-width: 265px !important;
+		margin: 0 auto 0 !important;
+		color: $white;
+		text-transform: uppercase;
+		text-align: center;
+		background-color: transparent;
+
+		&:hover{
+			background-color: $white;
+			color: $black;
+		}
+	}
+
+	form{
+		max-width: 550px;
+		margin: 0 auto;
+
+		input, textarea{
+			border: 0;
+			background-color: $darkGrey;
+			padding: 14px 10px !important;
+			@include placeholderColor($lightGrey);
+			color: $white;
+		}
+
+		.validation_error, .validation_message{
+			color: $white;
+			padding: 5px 10px;
+		}
+
+		.gfield_error{
+			border-color: $white !important;
+			background-color: rgba(255,255,255,0.4) !important;
+		}
+	}
+}

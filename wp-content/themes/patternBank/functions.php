@@ -11,7 +11,8 @@ add_theme_support( 'menus' );
 function register_my_menus() {
   register_nav_menus(
     array(  
-      'main_nav' => __( 'Main nav' ), 
+      'main_nav' => __( 'Main nav' ),
+      'footer_nav' => __( 'Footer navigation' )
       //'product_left' => __( 'Product left' )
     )
   );

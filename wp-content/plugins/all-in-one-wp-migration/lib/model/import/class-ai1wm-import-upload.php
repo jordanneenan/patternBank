@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2016 ServMask Inc.
+ * Copyright (C) 2014-2018 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -51,8 +51,8 @@ class Ai1wm_Import_Upload {
 	public static function execute( $params ) {
 		self::validate();
 
-		$error =  $_FILES['upload-file']['error'];
-		$upload = $_FILES['upload-file']['tmp_name'];
+		$error   = $_FILES['upload-file']['error'];
+		$upload  = $_FILES['upload-file']['tmp_name'];
 		$archive = ai1wm_archive_path( $params );
 
 		switch ( $error ) {
@@ -60,11 +60,11 @@ class Ai1wm_Import_Upload {
 				try {
 					ai1wm_copy( $upload, $archive );
 					ai1wm_unlink( $upload );
-				} catch ( Exception $exception ) {
+				} catch ( Exception $e ) {
 					throw new Ai1wm_Import_Retry_Exception(
 						sprintf(
 							__( 'Unable to upload the file because %s', AI1WM_PLUGIN_NAME ),
-							$exception->getMessage()
+							$e->getMessage()
 						),
 						400
 					);
@@ -103,6 +103,8 @@ class Ai1wm_Import_Upload {
 					400
 				);
 		}
+
+		echo json_encode( array( 'errors' => array() ) );
 		exit;
 	}
 }

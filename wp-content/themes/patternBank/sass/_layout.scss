@@ -16,6 +16,10 @@ $spacingTriple: ( $spacing * 3 );
 	width: 100%;
 	max-width: $rowWidth;
 	margin: 0 auto;
+
+	.row_spacing{
+		padding-top: 120px;
+	}
 }
 
 .content_container{
@@ -23,4 +27,12 @@ $spacingTriple: ( $spacing * 3 );
 	max-width: $contentConstraint + ($gutter * 2);
 	margin: 0 auto;
 	padding: 0 $gutter;
+}
+
+@media only screen and (max-width: $navBreak){
+	.row{
+		.row_spacing{
+			padding-top: 80px;
+		}
+	}
 }

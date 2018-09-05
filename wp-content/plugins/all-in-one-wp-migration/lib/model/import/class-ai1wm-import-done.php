@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2016 ServMask Inc.
+ * Copyright (C) 2014-2018 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,82 +27,171 @@ class Ai1wm_Import_Done {
 
 	public static function execute( $params ) {
 
-		// Set shutdown handler
-		@register_shutdown_function( 'Ai1wm_Import_Done::shutdown' );
-
 		// Check multisite.json file
 		if ( true === is_file( ai1wm_multisite_path( $params ) ) ) {
-
 			// Read multisite.json file
-			$handle = fopen( ai1wm_multisite_path( $params ), 'r' );
-			if ( $handle === false ) {
-				throw new Ai1wm_Import_Exception( __( 'Unable to read multisite.json file', AI1WM_PLUGIN_NAME ) );
-			}
+			$handle = ai1wm_open( ai1wm_multisite_path( $params ), 'r' );
 
 			// Parse multisite.json file
-			$multisite = fread( $handle, filesize( ai1wm_multisite_path( $params ) ) );
-			$multisite = json_decode( $multisite );
+			$multisite = ai1wm_read( $handle, filesize( ai1wm_multisite_path( $params ) ) );
+			$multisite = json_decode( $multisite, true );
 
 			// Close handle
-			fclose( $handle );
+			ai1wm_close( $handle );
 
-			// Activate plugins
-			if ( isset( $multisite->Plugins ) && ( $active_sitewide_plugins = $multisite->Plugins ) ) {
-				activate_plugins( $active_sitewide_plugins, null, is_multisite() );
+			// Activate WordPress plugins
+			if ( isset( $multisite['Plugins'] ) && ( $plugins = $multisite['Plugins'] ) ) {
+				ai1wm_activate_plugins( $plugins );
+			}
+
+			// Deactivate WordPress SSL plugins
+			if ( ! is_ssl() ) {
+				ai1wm_deactivate_plugins( array(
+					ai1wm_discover_plugin_basename( 'really-simple-ssl/rlrsssl-really-simple-ssl.php' ),
+					ai1wm_discover_plugin_basename( 'wordpress-https/wordpress-https.php' ),
+					ai1wm_discover_plugin_basename( 'wp-force-ssl/wp-force-ssl.php' ),
+				) );
+			}
+
+			// Deactivate WordPress plugins
+			ai1wm_deactivate_plugins( array(
+				ai1wm_discover_plugin_basename( 'invisible-recaptcha/invisible-recaptcha.php' ),
+				ai1wm_discover_plugin_basename( 'wps-hide-login/wps-hide-login.php' ),
+				ai1wm_discover_plugin_basename( 'hide-my-wp/index.php' ),
+				ai1wm_discover_plugin_basename( 'hide-my-wordpress/index.php' ),
+				ai1wm_discover_plugin_basename( 'mycustomwidget/my_custom_widget.php' ),
+				ai1wm_discover_plugin_basename( 'lockdown-wp-admin/lockdown-wp-admin.php' ),
+				ai1wm_discover_plugin_basename( 'rename-wp-login/rename-wp-login.php' ),
+			) );
+
+			// Deactivate Jetpack modules
+			ai1wm_deactivate_jetpack_modules( array(
+				'photon',
+				'sso',
+			) );
+
+		} else {
+
+			// Check package.json file
+			if ( true === is_file( ai1wm_package_path( $params ) ) ) {
+
+				// Read package.json file
+				$handle = ai1wm_open( ai1wm_package_path( $params ), 'r' );
+
+				// Parse package.json file
+				$package = ai1wm_read( $handle, filesize( ai1wm_package_path( $params ) ) );
+				$package = json_decode( $package, true );
+
+				// Close handle
+				ai1wm_close( $handle );
+
+				// Activate WordPress plugins
+				if ( isset( $package['Plugins'] ) && ( $plugins = $package['Plugins'] ) ) {
+					ai1wm_activate_plugins( $plugins );
+				}
+
+				// Activate WordPress template
+				if ( isset( $package['Template'] ) && ( $template = $package['Template'] ) ) {
+					ai1wm_activate_template( $template );
+				}
+
+				// Activate WordPress stylesheet
+				if ( isset( $package['Stylesheet'] ) && ( $stylesheet = $package['Stylesheet'] ) ) {
+					ai1wm_activate_stylesheet( $stylesheet );
+				}
+
+				// Deactivate WordPress SSL plugins
+				if ( ! is_ssl() ) {
+					ai1wm_deactivate_plugins( array(
+						ai1wm_discover_plugin_basename( 'really-simple-ssl/rlrsssl-really-simple-ssl.php' ),
+						ai1wm_discover_plugin_basename( 'wordpress-https/wordpress-https.php' ),
+						ai1wm_discover_plugin_basename( 'wp-force-ssl/wp-force-ssl.php' ),
+					) );
+				}
+
+				// Deactivate WordPress plugins
+				ai1wm_deactivate_plugins( array(
+					ai1wm_discover_plugin_basename( 'invisible-recaptcha/invisible-recaptcha.php' ),
+					ai1wm_discover_plugin_basename( 'wps-hide-login/wps-hide-login.php' ),
+					ai1wm_discover_plugin_basename( 'hide-my-wp/index.php' ),
+					ai1wm_discover_plugin_basename( 'hide-my-wordpress/index.php' ),
+					ai1wm_discover_plugin_basename( 'mycustomwidget/my_custom_widget.php' ),
+					ai1wm_discover_plugin_basename( 'lockdown-wp-admin/lockdown-wp-admin.php' ),
+					ai1wm_discover_plugin_basename( 'rename-wp-login/rename-wp-login.php' ),
+				) );
+
+				// Deactivate Jetpack modules
+				ai1wm_deactivate_jetpack_modules( array(
+					'photon',
+					'sso',
+				) );
 			}
 		}
 
-		// Open the archive file for reading
-		$archive = new Ai1wm_Extractor( ai1wm_archive_path( $params ) );
+		// Check blogs.json file
+		if ( true === is_file( ai1wm_blogs_path( $params ) ) ) {
+			// Read blogs.json file
+			$handle = ai1wm_open( ai1wm_blogs_path( $params ), 'r' );
 
-		// Include WordPress files
-		$include_files = array_keys( _get_dropins() );
+			// Parse blogs.json file
+			$blogs = ai1wm_read( $handle, filesize( ai1wm_blogs_path( $params ) ) );
+			$blogs = json_decode( $blogs, true );
 
-		// Include mu-plugins files
-		$include_files = array_merge( $include_files, array( AI1WM_MUPLUGINS_NAME ) );
+			// Close handle
+			ai1wm_close( $handle );
 
-		// Unpack WordPress files and mu-plugins files
-		$archive->extract_by_files_array( WP_CONTENT_DIR, $include_files );
+			// Loop over blogs
+			foreach ( $blogs as $blog ) {
 
-		// Close the archive file
-		$archive->close();
-
-		// Load must-use plugins
-		foreach ( wp_get_mu_plugins() as $mu_plugin ) {
-			include_once( $mu_plugin );
-		}
-
-		return $params;
-	}
-
-	public static function shutdown() {
-		$error = error_get_last();
-
-		// Set error type
-		$type = null;
-		if ( isset( $error['type'] ) ) {
-			$type = $error['type'];
-		}
-
-		// Set error file
-		$file = null;
-		if ( isset( $error['file'] ) ) {
-			$file = $error['file'];
-		}
-
-		// Deactivate must-use plugins on fatal and parse errors
-		if ( in_array( $type, array( E_ERROR, E_PARSE ) ) && stripos( $file, AI1WM_MUPLUGINS_NAME ) !== false ) {
-			foreach ( wp_get_mu_plugins() as $mu_plugin ) {
-				if ( copy( $mu_plugin, sprintf( '%s-%s', $mu_plugin, date( 'YmdHis' ) ) ) ) {
-					if ( ( $handle = fopen( $mu_plugin, 'w' ) ) ) {
-						fclose( $handle );
-					}
+				// Activate WordPress plugins
+				if ( isset( $blog['New']['Plugins'] ) && ( $plugins = $blog['New']['Plugins'] ) ) {
+					ai1wm_activate_plugins( $plugins );
 				}
+
+				// Activate WordPress template
+				if ( isset( $blog['New']['Template'] ) && ( $template = $blog['New']['Template'] ) ) {
+					ai1wm_activate_template( $template );
+				}
+
+				// Activate WordPress stylesheet
+				if ( isset( $blog['New']['Stylesheet'] ) && ( $stylesheet = $blog['New']['Stylesheet'] ) ) {
+					ai1wm_activate_stylesheet( $stylesheet );
+				}
+
+				// Deactivate WordPress SSL plugins
+				if ( ! is_ssl() ) {
+					ai1wm_deactivate_plugins( array(
+						ai1wm_discover_plugin_basename( 'really-simple-ssl/rlrsssl-really-simple-ssl.php' ),
+						ai1wm_discover_plugin_basename( 'wordpress-https/wordpress-https.php' ),
+						ai1wm_discover_plugin_basename( 'wp-force-ssl/wp-force-ssl.php' ),
+					) );
+				}
+
+				// Deactivate WordPress plugins
+				ai1wm_deactivate_plugins( array(
+					ai1wm_discover_plugin_basename( 'invisible-recaptcha/invisible-recaptcha.php' ),
+					ai1wm_discover_plugin_basename( 'wps-hide-login/wps-hide-login.php' ),
+					ai1wm_discover_plugin_basename( 'hide-my-wp/index.php' ),
+					ai1wm_discover_plugin_basename( 'hide-my-wordpress/index.php' ),
+					ai1wm_discover_plugin_basename( 'mycustomwidget/my_custom_widget.php' ),
+					ai1wm_discover_plugin_basename( 'lockdown-wp-admin/lockdown-wp-admin.php' ),
+					ai1wm_discover_plugin_basename( 'rename-wp-login/rename-wp-login.php' ),
+				) );
+
+				// Deactivate Jetpack modules
+				ai1wm_deactivate_jetpack_modules( array(
+					'photon',
+					'sso',
+				) );
 			}
 		}
 
 		// Set progress
 		Ai1wm_Status::done(
+			__(
+				'Your data has been imported successfully!',
+				AI1WM_PLUGIN_NAME
+			),
 			sprintf(
 				__(
 					'You need to perform two more steps:<br />' .
@@ -111,11 +200,9 @@ class Ai1wm_Import_Done {
 					AI1WM_PLUGIN_NAME
 				),
 				admin_url( 'options-permalink.php#submit' )
-			),
-			__(
-				'Your data has been imported successfuly!',
-				AI1WM_PLUGIN_NAME
 			)
 		);
+
+		return $params;
 	}
 }

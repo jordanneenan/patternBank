@@ -1,5 +1,7 @@
 <?php
 /**
+ * WPSEO plugin file.
+ *
  * @package WPSEO\Admin
  */
 
@@ -71,36 +73,39 @@ class WPSEO_Taxonomy_Fields_Presenter {
 	 */
 	private function get_field( $field_type, $field_name, $field_value, array $options ) {
 
-		$class = $this->get_class( $options );
-		$field = $description = $aria_describedby = '';
+		$class            = $this->get_class( $options );
+		$field            = '';
+		$description      = '';
+		$aria_describedby = '';
 
 		if ( ! empty( $options['description'] ) ) {
 			$aria_describedby = ' aria-describedby="' . $field_name . '-desc"';
-			$description = '<p id="' . $field_name . '-desc">' . $options['description'] . '</p>';
+			$description      = '<p id="' . $field_name . '-desc" class="yoast-metabox__description">' . $options['description'] . '</p>';
 		}
 
 		switch ( $field_type ) {
-			case 'div' :
-				$field .= '<div id="' . $field_name . '"' . $aria_describedby . '></div>';
+			case 'div':
+				$field .= '<div id="' . $field_name . '"></div>';
 				break;
-			case 'text' :
+
+			case 'text':
 				$field .= '<input name="' . $field_name . '" id="' . $field_name . '" ' . $class . ' type="text" value="' . esc_attr( $field_value ) . '" size="40"' . $aria_describedby . '/>';
 				break;
-			case 'checkbox' :
+			case 'checkbox':
 				$field .= '<input name="' . $field_name . '" id="' . $field_name . '" type="checkbox" ' . checked( $field_value ) . $aria_describedby . '/>';
 				break;
-			case 'textarea' :
+			case 'textarea':
 				$rows = 3;
 				if ( ! empty( $options['rows'] ) ) {
 					$rows = $options['rows'];
 				}
 				$field .= '<textarea class="large-text" rows="' . esc_attr( $rows ) . '" id="' . $field_name . '" name="' . $field_name . '"' . $aria_describedby . '>' . esc_textarea( $field_value ) . '</textarea>';
 				break;
-			case 'upload' :
+			case 'upload':
 				$field .= '<input id="' . $field_name . '" type="text" size="36" name="' . $field_name . '" value="' . esc_attr( $field_value ) . '"' . $aria_describedby . ' />';
 				$field .= '<input id="' . $field_name . '_button" class="wpseo_image_upload_button button" type="button" value="' . esc_attr__( 'Upload Image', 'wordpress-seo' ) . '" />';
 				break;
-			case 'select' :
+			case 'select':
 				if ( is_array( $options ) && $options !== array() ) {
 					$field .= '<select name="' . $field_name . '" id="' . $field_name . '"' . $aria_describedby . '>';
 
@@ -108,14 +113,14 @@ class WPSEO_Taxonomy_Fields_Presenter {
 
 					foreach ( $select_options as $option => $option_label ) {
 						$selected = selected( $option, $field_value, false );
-						$field .= '<option ' . $selected . ' value="' . esc_attr( $option ) . '">' . esc_html( $option_label ) . '</option>';
+						$field   .= '<option ' . $selected . ' value="' . esc_attr( $option ) . '">' . esc_html( $option_label ) . '</option>';
 					}
 					unset( $option, $option_label, $selected );
 
 					$field .= '</select>';
 				}
 				break;
-			case 'hidden' :
+			case 'hidden':
 				$field .= '<input name="' . $field_name . '" id="hidden_' . $field_name . '" type="hidden" value="' . esc_attr( $field_value ) . '" />';
 				break;
 		}
@@ -156,7 +161,7 @@ class WPSEO_Taxonomy_Fields_Presenter {
 	/**
 	 * Getting the label HTML
 	 *
-	 * @param string $label	     The label value.
+	 * @param string $label      The label value.
 	 * @param string $field_name The target field.
 	 *
 	 * @return string
@@ -180,7 +185,7 @@ class WPSEO_Taxonomy_Fields_Presenter {
 	 */
 	private function parse_row( $label, WPSEO_Admin_Help_Panel $help, $field ) {
 		if ( $label !== '' || $help !== '' ) {
-			return '<tr><th scope="row">' . $label . $help->get_button_html() . '</th><td>' . $help->get_panel_html() . $field . '</td></tr>';
+			return $label . $help->get_button_html() . $help->get_panel_html() . $field;
 		}
 
 		return $field;

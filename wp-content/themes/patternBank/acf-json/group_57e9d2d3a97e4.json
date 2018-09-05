@@ -101,6 +101,63 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_58b615bb535ae",
+            "label": "Open link in new tab",
+            "name": "new_tab",
+            "type": "true_false",
+            "instructions": "Opens a new tab when the button is clicked",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_58b615e4535af",
+            "label": "Left align content",
+            "name": "left_align_content",
+            "type": "true_false",
+            "instructions": "Aligns the banner content to the left of the screen.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_58b61601535b0",
+            "label": "Full screen banner",
+            "name": "full_screen_banner",
+            "type": "true_false",
+            "instructions": "Make the banner full screen - you will still be able to scroll down to the content.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -120,5 +177,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1474942092
+    "modified": 1488328247
 }

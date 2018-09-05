@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2016 ServMask Inc.
+ * Copyright (C) 2014-2018 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,165 +27,148 @@ class Ai1wm_Import_Content {
 
 	public static function execute( $params ) {
 
-		// Read blogs.json file
-		$handle = fopen( ai1wm_blogs_path( $params ), 'r' );
-		if ( $handle === false ) {
-			throw new Ai1wm_Import_Exception( 'Unable to read blogs.json file' );
+		// Set archive bytes offset
+		if ( isset( $params['archive_bytes_offset'] ) ) {
+			$archive_bytes_offset = (int) $params['archive_bytes_offset'];
+		} else {
+			$archive_bytes_offset = 0;
 		}
+
+		// Set file bytes offset
+		if ( isset( $params['file_bytes_offset'] ) ) {
+			$file_bytes_offset = (int) $params['file_bytes_offset'];
+		} else {
+			$file_bytes_offset = 0;
+		}
+
+		// Get processed files size
+		if ( isset( $params['processed_files_size'] ) ) {
+			$processed_files_size = (int) $params['processed_files_size'];
+		} else {
+			$processed_files_size = 0;
+		}
+
+		// Get total files size
+		if ( isset( $params['total_files_size'] ) ) {
+			$total_files_size = (int) $params['total_files_size'];
+		} else {
+			$total_files_size = 1;
+		}
+
+		// Get total files count
+		if ( isset( $params['total_files_count'] ) ) {
+			$total_files_count = (int) $params['total_files_count'];
+		} else {
+			$total_files_count = 1;
+		}
+
+		// Read blogs.json file
+		$handle = ai1wm_open( ai1wm_blogs_path( $params ), 'r' );
 
 		// Parse blogs.json file
-		$blogs = fread( $handle, filesize( ai1wm_blogs_path( $params ) ) );
-		$blogs = json_decode( $blogs );
+		$blogs = ai1wm_read( $handle, filesize( ai1wm_blogs_path( $params ) ) );
+		$blogs = json_decode( $blogs, true );
 
 		// Close handle
-		fclose( $handle );
-
-		// Set content offset
-		if ( isset( $params['content_offset'] ) ) {
-			$content_offset = (int) $params['content_offset'];
-		} else {
-			$content_offset = 0;
-		}
-
-		// Set archive offset
-		if ( isset( $params['archive_offset']) ) {
-			$archive_offset = (int) $params['archive_offset'];
-		} else {
-			$archive_offset = 0;
-		}
-
-		// Get total files
-		if ( isset( $params['total_files'] ) ) {
-			$total_files = (int) $params['total_files'];
-		} else {
-			$total_files = 1;
-		}
-
-		// Get total size
-		if ( isset( $params['total_size'] ) ) {
-			$total_size = (int) $params['total_size'];
-		} else {
-			$total_size = 1;
-		}
-
-		// Get processed files
-		if ( isset( $params['processed'] ) ) {
-			$processed = (int) $params['processed'];
-		} else {
-			$processed = 0;
-		}
+		ai1wm_close( $handle );
 
 		// What percent of files have we processed?
-		$progress = (int) ( ( $processed / $total_size ) * 100 );
+		$progress = (int) min( ( $processed_files_size / $total_files_size ) * 100, 100 );
 
 		// Set progress
-		if ( empty( $content_offset ) ) {
-			Ai1wm_Status::info( sprintf( __( 'Restoring %d files...<br />%d%% complete', AI1WM_PLUGIN_NAME ), $total_files, $progress ) );
-		}
+		Ai1wm_Status::info( sprintf( __( 'Restoring %d files...<br />%d%% complete', AI1WM_PLUGIN_NAME ), $total_files_count, $progress ) );
+
+		// Flag to hold if file data has been processed
+		$completed = true;
 
 		// Start time
 		$start = microtime( true );
-
-		// Flag to hold if all files have been processed
-		$completed = true;
 
 		// Open the archive file for reading
 		$archive = new Ai1wm_Extractor( ai1wm_archive_path( $params ) );
 
 		// Set the file pointer to the one that we have saved
-		$archive->set_file_pointer( null, $archive_offset );
+		$archive->set_file_pointer( $archive_bytes_offset );
 
 		$old_paths = array();
 		$new_paths = array();
 
 		// Set extract paths
 		foreach ( $blogs as $blog ) {
-			if ( ai1wm_main_site( $blog->Old->Id ) === false ) {
+			if ( ai1wm_main_site( $blog['Old']['BlogID'] ) === false ) {
 				if ( defined( 'UPLOADBLOGSDIR' ) ) {
 					// Old sites dir style
-					$old_paths[] = ai1wm_files_path( $blog->Old->Id );
-					$new_paths[] = ai1wm_files_path( $blogs->New->Id );
+					$old_paths[] = ai1wm_files_path( $blog['Old']['BlogID'] );
+					$new_paths[] = ai1wm_files_path( $blog['New']['BlogID'] );
 
 					// New sites dir style
-					$old_paths[] = ai1wm_sites_path( $blog->Old->Id );
-					$new_paths[] = ai1wm_files_path( $blog->New->Id );
+					$old_paths[] = ai1wm_sites_path( $blog['Old']['BlogID'] );
+					$new_paths[] = ai1wm_files_path( $blog['New']['BlogID'] );
 				} else {
 					// Old sites dir style
-					$old_paths[] = ai1wm_files_path( $blog->Old->Id );
-					$new_paths[] = ai1wm_sites_path( $blog->New->Id );
+					$old_paths[] = ai1wm_files_path( $blog['Old']['BlogID'] );
+					$new_paths[] = ai1wm_sites_path( $blog['New']['BlogID'] );
 
 					// New sites dir style
-					$old_paths[] = ai1wm_sites_path( $blog->Old->Id );
-					$new_paths[] = ai1wm_sites_path( $blog->New->Id );
+					$old_paths[] = ai1wm_sites_path( $blog['Old']['BlogID'] );
+					$new_paths[] = ai1wm_sites_path( $blog['New']['BlogID'] );
 				}
 			}
 		}
 
 		// Set base site extract paths (should be added at the end of arrays)
 		foreach ( $blogs as $blog ) {
-			if ( ai1wm_main_site( $blog->Old->Id ) === true ) {
-				$old_paths[] = ai1wm_sites_path( $blog->Old->Id );
-				$new_paths[] = ai1wm_sites_path( $blog->New->Id );
+			if ( ai1wm_main_site( $blog['Old']['BlogID'] ) === true ) {
+				if ( defined( 'UPLOADBLOGSDIR' ) ) {
+					// Old sites dir style
+					$old_paths[] = ai1wm_files_path( $blog['Old']['BlogID'] );
+					$new_paths[] = ai1wm_files_path( $blog['New']['BlogID'] );
+
+					// New sites dir style
+					$old_paths[] = ai1wm_sites_path( $blog['Old']['BlogID'] );
+					$new_paths[] = ai1wm_files_path( $blog['New']['BlogID'] );
+				} else {
+					// Old sites dir style
+					$old_paths[] = ai1wm_files_path( $blog['Old']['BlogID'] );
+					$new_paths[] = ai1wm_sites_path( $blog['New']['BlogID'] );
+
+					// New sites dir style
+					$old_paths[] = ai1wm_sites_path( $blog['Old']['BlogID'] );
+					$new_paths[] = ai1wm_sites_path( $blog['New']['BlogID'] );
+				}
 			}
 		}
 
 		while ( $archive->has_not_reached_eof() ) {
-			try {
+			$file_bytes_written = 0;
 
-				// Exclude WordPress files
-				$exclude_files = array_keys( _get_dropins() );
+			// Exclude WordPress files
+			$exclude_files = array_keys( _get_dropins() );
 
-				// Exclude plugin files
-				$exclude_files = array_merge( $exclude_files, array(
-					AI1WM_PACKAGE_NAME,
-					AI1WM_MULTISITE_NAME,
-					AI1WM_DATABASE_NAME,
-					AI1WM_MUPLUGINS_NAME,
-				) );
+			// Exclude plugin files
+			$exclude_files = array_merge( $exclude_files, array(
+				AI1WM_PACKAGE_NAME,
+				AI1WM_MULTISITE_NAME,
+				AI1WM_DATABASE_NAME,
+				AI1WM_MUPLUGINS_NAME,
+			) );
 
-				// Extract a file from archive to WP_CONTENT_DIR
-				if ( ( $current_offset = $archive->extract_one_file_to( WP_CONTENT_DIR, $exclude_files, $old_paths, $new_paths, $content_offset, 10 ) ) ) {
-
-					// What percent of files have we processed?
-					if ( ( $processed += ( $current_offset - $content_offset ) ) ) {
-						$progress = (int) ( ( $processed / $total_size ) * 100 );
-					}
-
-					// Set progress
-					Ai1wm_Status::info( sprintf( __( 'Restoring %d files...<br />%d%% complete', AI1WM_PLUGIN_NAME ), $total_files, $progress ) );
-
-					// Set content offset
-					$params['content_offset'] = $current_offset;
-
-					// Set archive offset
-					$params['archive_offset'] = $archive_offset;
-
-					// Set processed files
-					$params['processed'] = $processed;
-
-					// Set completed flag
-					$params['completed'] = false;
-
-					// Close the archive file
-					$archive->close();
-
-					return $params;
-				}
-
-				// Increment processed files
-				if ( empty( $content_offset ) ) {
-					$processed += $archive->get_current_filesize();
-				}
-
-				// Set content offset
-				$content_offset = 0;
-
-				// Set archive offset
-				$archive_offset = $archive->get_file_pointer();
-
-			} catch ( Exception $e ) {
-				// Skip bad file permissions
+			// Extract a file from archive to WP_CONTENT_DIR
+			if ( ( $completed = $archive->extract_one_file_to( WP_CONTENT_DIR, $exclude_files, $old_paths, $new_paths, $file_bytes_written, $file_bytes_offset, 10 ) ) ) {
+				$file_bytes_offset = 0;
 			}
+
+			// Get archive bytes offset
+			$archive_bytes_offset = $archive->get_file_pointer();
+
+			// Increment processed files size
+			$processed_files_size += $file_bytes_written;
+
+			// What percent of files have we processed?
+			$progress = (int) min( ( $processed_files_size / $total_files_size ) * 100, 100 );
+
+			// Set progress
+			Ai1wm_Status::info( sprintf( __( 'Restoring %d files...<br />%d%% complete', AI1WM_PLUGIN_NAME ), $total_files_count, $progress ) );
 
 			// More than 10 seconds have passed, break and do another request
 			if ( ( microtime( true ) - $start ) > 10 ) {
@@ -194,17 +177,47 @@ class Ai1wm_Import_Content {
 			}
 		}
 
-		// Set content offset
-		$params['content_offset'] = $content_offset;
+		// End of the archive?
+		if ( $archive->has_reached_eof() ) {
 
-		// Set archive offset
-		$params['archive_offset'] = $archive_offset;
+			// Unset archive bytes offset
+			unset( $params['archive_bytes_offset'] );
 
-		// Set processed files
-		$params['processed'] = $processed;
+			// Unset file bytes offset
+			unset( $params['file_bytes_offset'] );
 
-		// Set completed flag
-		$params['completed'] = $completed;
+			// Unset processed files size
+			unset( $params['processed_files_size'] );
+
+			// Unset total files size
+			unset( $params['total_files_size'] );
+
+			// Unset total files count
+			unset( $params['total_files_count'] );
+
+			// Unset completed flag
+			unset( $params['completed'] );
+
+		} else {
+
+			// Set archive bytes offset
+			$params['archive_bytes_offset'] = $archive_bytes_offset;
+
+			// Set file bytes offset
+			$params['file_bytes_offset'] = $file_bytes_offset;
+
+			// Set processed files size
+			$params['processed_files_size'] = $processed_files_size;
+
+			// Set total files size
+			$params['total_files_size'] = $total_files_size;
+
+			// Set total files count
+			$params['total_files_count'] = $total_files_count;
+
+			// Set completed flag
+			$params['completed'] = $completed;
+		}
 
 		// Close the archive file
 		$archive->close();

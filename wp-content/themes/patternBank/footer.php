@@ -1,6 +1,6 @@
 
 <?php wp_footer(); ?>
-
+			</div><!--close page_wrapper -->
 			<footer>
 				<div class="footer-wrapper">
 
@@ -12,7 +12,7 @@
 
 					<nav class="footer-nav cfx"><?php wp_nav_menu (array ("theme_location" => "footer_nav")); ?></nav>
 
-					<p class="copy">&copy; patternBank <?php echo the_date('Y'); ?>. All rights reserved.</p>
+					<p class="copy">&copy; patternBank <?php echo date('Y'); ?>. All rights reserved.</p>
 
 				</div>
 			</footer>

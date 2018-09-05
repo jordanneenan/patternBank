@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2016 ServMask Inc.
+ * Copyright (C) 2014-2018 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,9 +38,9 @@ class Ai1wm_Log {
 		$data[] = PHP_EOL;
 
 		// Write log data
-		if ( $handle = fopen( ai1wm_export_path( $params ), 'a' ) ) {
-			fwrite( $handle, implode( PHP_EOL, $data ) );
-			fclose( $handle );
+		if ( $handle = ai1wm_open( ai1wm_export_path( $params ), 'a' ) ) {
+			ai1wm_write( $handle, implode( PHP_EOL, $data ) );
+			ai1wm_close( $handle );
 		}
 	}
 
@@ -57,9 +57,9 @@ class Ai1wm_Log {
 		$data[] = PHP_EOL;
 
 		// Write log data
-		if ( $handle = fopen( ai1wm_import_path( $params ), 'a' ) ) {
-			fwrite( $handle, implode( PHP_EOL, $data ) );
-			fclose( $handle );
+		if ( $handle = ai1wm_open( ai1wm_import_path( $params ), 'a' ) ) {
+			ai1wm_write( $handle, implode( PHP_EOL, $data ) );
+			ai1wm_close( $handle );
 		}
 	}
 
@@ -76,9 +76,9 @@ class Ai1wm_Log {
 		$data[] = PHP_EOL;
 
 		// Write log data
-		if ( $handle = fopen( ai1wm_error_path(), 'a' ) ) {
-			fwrite( $handle, implode( PHP_EOL, $data ) );
-			fclose( $handle );
+		if ( $handle = ai1wm_open( ai1wm_error_path(), 'a' ) ) {
+			ai1wm_write( $handle, implode( PHP_EOL, $data ) );
+			ai1wm_close( $handle );
 		}
 	}
 }

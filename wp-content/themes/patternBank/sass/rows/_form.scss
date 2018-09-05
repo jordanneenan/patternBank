@@ -1,6 +1,5 @@
 .form_row{
 	text-align: center;
-	padding: 60px 0;
 
 	.copy{
 		max-width: 550px;
@@ -19,7 +18,7 @@
 }
 
 form{
-	max-width: 550px;
+	max-width: 550px !important;
 	margin: 0 auto;
 	position: relative;
 
@@ -29,12 +28,21 @@ form{
 		padding: 14px 10px !important;
 		@include placeholderColor($grey);
 		color: $black;
+		line-height: 1 !important;
 	}
 }
 
 .gform_wrapper ul.gform_fields li.gfield{
 	padding-right: 0 !important;
 	margin: 0 0 10px !important;
+}
+
+.gform_wrapper .gform_body{
+	width: 100% !important;
+}
+
+.gform_wrapper.gform_validation_error .gform_body ul li.gfield.gfield_error.gfield_visibility_visible{
+	max-width: 100% !important;
 }
 
 .gfield_label{
@@ -72,6 +80,8 @@ form{
 	}
 }
 
+//Insert the following html with dev tools after the submit button to show the spinner
+//<img id="gform_ajax_spinner_1" class="gform_ajax_spinner" src="/wp-content/plugins/gravityforms/images/spinner.gif" alt="" />
 .gform_ajax_spinner{
 	display: block;
 	position: absolute;
@@ -84,6 +94,32 @@ form{
 	height: 35px;
 	text-align: center;
 	padding: 10px 10px 10px 0;
+}
+
+.gform_wrapper li.gfield.gfield_error{
+	border: 0 !important;
+	background-color: $white !important;
+	background-color: transparent !important;
+	padding: 0 0 8px !important;
+}
+
+.gform_wrapper li.gfield.gfield_error, .gform_wrapper .field_description_below .gfield_description.validation_message{
+	padding: 4px 0 0 30px;
+}
+
+.gform_wrapper .field_description_below .gfield_description.validation_message{
+	background: url("../img/icons/exclamationmark.svg") 9px 8px no-repeat;
+	background-size: 14px 14px;
+	color: #b5422f;
+}
+
+.validation_error{
+	color: #b5422f !important;
+	border-color: #b5422f !important;
+}
+
+.gform_wrapper li.gfield_error input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), .gform_wrapper li.gfield_error textarea, .gfield_error .selectric{
+	border-color: #b5422f !important;
 }
 
 .form_row.dark{

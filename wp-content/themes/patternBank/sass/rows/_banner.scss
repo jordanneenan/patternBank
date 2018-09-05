@@ -5,6 +5,10 @@
 	background-size: cover !important;
 	text-align: center;
 
+	&.full_height{
+		height: 100vh;
+	}
+
 	h1, h2, p, a{
 		max-width: 580px;
 		margin: 0 auto;

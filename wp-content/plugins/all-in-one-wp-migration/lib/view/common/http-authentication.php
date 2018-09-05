@@ -1,24 +1,24 @@
-<h2><?php _e( 'HTTP Basic Authentication', AI1WM_PLUGIN_NAME ); ?></h2>
-
-<div class="ai1wm-authentication">
-	<form method="POST" action="">
-		<div class="ai1wm-field">
-			<label for="ai1wm-username"><?php _e( 'Username', AI1WM_PLUGIN_NAME ); ?></label>
-			<input type="text" autocomplete="off" placeholder="<?php _e( 'Enter Username', AI1WM_PLUGIN_NAME ); ?>" id="ai1wm-username" name="ai1wm-username" class="ai1wm-http-authentication" value="<?php echo $username; ?>" />
-		</div>
-
-		<div class="ai1wm-field">
-			<label for="ai1wm-password"><?php _e( 'Password', AI1WM_PLUGIN_NAME ); ?></label>
-			<input type="password" autocomplete="off" placeholder="<?php _e( 'Enter Password', AI1WM_PLUGIN_NAME ); ?>" id="ai1wm-password" name="ai1wm-password" class="ai1wm-http-authentication" value="<?php echo $password; ?>" />
-		</div>
-
-		<p class="ai1wm-authentication-info"><?php _e( 'Populate the above fields if current site is password protected with <strong>.htaccess</strong> or any other HTTP Basic Authentication mechanism.', AI1WM_PLUGIN_NAME ); ?></p>
-
-		<div class="ai1wm-field">
-			<button type="submit" class="ai1wm-button-blue">
-				<i class="ai1wm-icon-save"></i>
-				<?php _e( 'Update', AI1WM_PLUGIN_NAME ); ?>
-			</button>
-		</div>
-	</form>
-</div>
+<?php
+/**
+ * Copyright (C) 2014-2018 ServMask Inc.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * ███████╗███████╗██████╗ ██╗   ██╗███╗   ███╗ █████╗ ███████╗██╗  ██╗
+ * ██╔════╝██╔════╝██╔══██╗██║   ██║████╗ ████║██╔══██╗██╔════╝██║ ██╔╝
+ * ███████╗█████╗  ██████╔╝██║   ██║██╔████╔██║███████║███████╗█████╔╝
+ * ╚════██║██╔══╝  ██╔══██╗╚██╗ ██╔╝██║╚██╔╝██║██╔══██║╚════██║██╔═██╗
+ * ███████║███████╗██║  ██║ ╚████╔╝ ██║ ╚═╝ ██║██║  ██║███████║██║  ██╗
+ * ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
+ */

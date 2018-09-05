@@ -22,12 +22,19 @@
 ?>
 <!-- /BANNER -->
 
-<!-- Image copy -->
+<!-- GENERAL MODULE -->
+<?php
+	include_once(ABSPATH .'wp-content/themes/patternBank/rows/general_module/general_module.php');
+	callGeneralModule();
+?>
+<!-- /GENERAL MODULE -->
+
+<!-- IMAGE COPY -->
 <?php
 	include_once(ABSPATH .'wp-content/themes/patternBank/rows/image_copy/image_copy.php');
 	callImageCopy('image_copy', 'default', 'full-width');
 ?>
-<!-- /Image copy -->
+<!-- /IMAGE COPY -->
 
 	<div class="row">
 		<div class="content_container">
@@ -43,11 +50,6 @@
 ?>
 		</div>
 	</div>
-
-<?php
-	// include_once(ABSPATH .'wp-content/themes/patternBank/editor/editor.php');
-	// addEditor();
-?>
 
 <!-- COLOUR PALETTE -->
 	<div class="row">

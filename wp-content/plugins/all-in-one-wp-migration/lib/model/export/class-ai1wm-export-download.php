@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2016 ServMask Inc.
+ * Copyright (C) 2014-2018 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,19 +30,28 @@ class Ai1wm_Export_Download {
 		// Set progress
 		Ai1wm_Status::info( __( 'Renaming exported file...', AI1WM_PLUGIN_NAME ) );
 
-		// Close achive file
+		// Open the archive file for writing
 		$archive = new Ai1wm_Compressor( ai1wm_archive_path( $params ) );
 
 		// Append EOF block
 		$archive->close( true );
 
 		// Rename archive file
-		if ( rename( ai1wm_archive_path( $params ), ai1wm_download_path( $params ) ) ) {
+		if ( rename( ai1wm_archive_path( $params ), ai1wm_backup_path( $params ) ) ) {
+
+			$blog_id = null;
+
+			// Get subsite Blog ID
+			if ( isset( $params['options']['sites'] ) && ( $sites = $params['options']['sites'] ) ) {
+				if ( count( $sites ) === 1 ) {
+					$blog_id = array_shift( $sites );
+				}
+			}
 
 			// Set archive details
-			$link = ai1wm_backups_url( $params );
-			$size = ai1wm_download_size( $params );
-			$name = ai1wm_site_name();
+			$link = ai1wm_backup_url( $params );
+			$size = ai1wm_backup_size( $params );
+			$name = ai1wm_site_name( $blog_id );
 
 			// Set progress
 			Ai1wm_Status::download(

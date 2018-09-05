@@ -1,8 +1,4 @@
 <?php
-/**
-  * Template Name: News template
-*/
-
 	get_header();
 ?>
 
@@ -19,8 +15,7 @@
 <script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/rows/article-filter.js'></script>
 
 <div class="row">
-		<div class="content_container">
-
+	<div class="content_container">
 
 <?php $args = array(
 	'parent' => 0,
@@ -64,9 +59,6 @@ $cats = get_categories($args); ?>
 		endwhile;
 ?>
 
-
-
-
 <?php the_posts_pagination( array( 'mid_size' => 5 ) ); ?>
 
 
@@ -74,8 +66,6 @@ $cats = get_categories($args); ?>
 <?php
 	wp_reset_postdata();
 ?>
-
-
 
 		</div>
 	</div><!-- close post list container -->
@@ -86,17 +76,6 @@ $cats = get_categories($args); ?>
 
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
 
 <?php 
 	get_footer(); 

@@ -6,24 +6,27 @@
 @import 'layout';
 @import 'colours';
 @import 'typography';
+@import 'tools';
 
 /* Components */
 @import 'components/header';
 @import 'components/nav';
 @import 'components/hamburger';
 @import 'components/button';
+@import 'components/pagination';
 @import 'components/footer';
 
 /* Specifcs */
-@import 'specifics/style-guide';
-@import 'specifics/style-guide-editor';
-@import 'specifics/home';
+//@import 'specifics/home';
 
 /* Rows */
-@import 'rows/collapsable-copy';
 @import 'rows/carousel';
 @import 'rows/banner';
 @import 'rows/article-list';
 @import 'rows/general-module';
 @import 'rows/image-copy';
 @import 'rows/form';
+@import 'rows/simple-copy';
+@import 'rows/article';
+@import 'rows/ajax-filter';
+@import 'rows/spacing';

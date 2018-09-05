@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (C) 2014-2016 ServMask Inc.
+ * Copyright (C) 2014-2018 ServMask Inc.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  * ╚══════╝╚══════╝╚═╝  ╚═╝  ╚═══╝  ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
  */
 
-// include all the files that you want to load in here
+// Include all the files that you want to load in here
 require_once AI1WM_VENDOR_PATH .
 			DIRECTORY_SEPARATOR .
 			'bandar' .
@@ -33,6 +33,25 @@ require_once AI1WM_VENDOR_PATH .
 			'lib' .
 			DIRECTORY_SEPARATOR .
 			'Bandar.php';
+
+
+if ( class_exists( 'WP_CLI' ) ) {
+	require_once AI1WM_VENDOR_PATH .
+				DIRECTORY_SEPARATOR .
+				'servmask' .
+				DIRECTORY_SEPARATOR .
+				'command' .
+				DIRECTORY_SEPARATOR .
+				'class-ai1wm-wp-cli-command.php';
+}
+
+require_once AI1WM_VENDOR_PATH .
+			DIRECTORY_SEPARATOR .
+			'servmask' .
+			DIRECTORY_SEPARATOR .
+			'filesystem' .
+			DIRECTORY_SEPARATOR .
+			'class-ai1wm-directory.php';
 
 require_once AI1WM_VENDOR_PATH .
 			DIRECTORY_SEPARATOR .
@@ -62,6 +81,14 @@ require_once AI1WM_VENDOR_PATH .
 			DIRECTORY_SEPARATOR .
 			'servmask' .
 			DIRECTORY_SEPARATOR .
+			'filesystem' .
+			DIRECTORY_SEPARATOR .
+			'class-ai1wm-file-webconfig.php';
+
+require_once AI1WM_VENDOR_PATH .
+			DIRECTORY_SEPARATOR .
+			'servmask' .
+			DIRECTORY_SEPARATOR .
 			'cron' .
 			DIRECTORY_SEPARATOR .
 			'class-ai1wm-cron.php';
@@ -71,8 +98,16 @@ require_once AI1WM_VENDOR_PATH .
 			'servmask' .
 			DIRECTORY_SEPARATOR .
 			'iterator' .
-			 DIRECTORY_SEPARATOR .
+			DIRECTORY_SEPARATOR .
 			'class-ai1wm-recursive-directory-iterator.php';
+
+require_once AI1WM_VENDOR_PATH .
+			DIRECTORY_SEPARATOR .
+			'servmask' .
+			DIRECTORY_SEPARATOR .
+			'iterator' .
+			DIRECTORY_SEPARATOR .
+			'class-ai1wm-recursive-iterator-iterator.php';
 
 require_once AI1WM_VENDOR_PATH .
 			DIRECTORY_SEPARATOR .
@@ -80,7 +115,7 @@ require_once AI1WM_VENDOR_PATH .
 			DIRECTORY_SEPARATOR .
 			'filter' .
 			DIRECTORY_SEPARATOR .
-			'class-ai1wm-extension-filter.php';
+			'class-ai1wm-recursive-extension-filter.php';
 
 require_once AI1WM_VENDOR_PATH .
 			DIRECTORY_SEPARATOR .
@@ -89,6 +124,14 @@ require_once AI1WM_VENDOR_PATH .
 			'filter' .
 			DIRECTORY_SEPARATOR .
 			'class-ai1wm-recursive-exclude-filter.php';
+
+require_once AI1WM_VENDOR_PATH .
+			DIRECTORY_SEPARATOR .
+			'servmask' .
+			DIRECTORY_SEPARATOR .
+			'filter' .
+			DIRECTORY_SEPARATOR .
+			'class-ai1wm-recursive-newline-filter.php';
 
 require_once AI1WM_VENDOR_PATH .
 			DIRECTORY_SEPARATOR .
@@ -146,6 +189,12 @@ require_once AI1WM_VENDOR_PATH .
 			DIRECTORY_SEPARATOR .
 			'class-ai1wm-database-utility.php';
 
+require_once AI1WM_VENDOR_PATH .
+			DIRECTORY_SEPARATOR .
+			'math' .
+			DIRECTORY_SEPARATOR .
+			'BigInteger.php';
+
 require_once AI1WM_CONTROLLER_PATH .
 			DIRECTORY_SEPARATOR .
 			'class-ai1wm-main-controller.php';
@@ -161,10 +210,6 @@ require_once AI1WM_CONTROLLER_PATH .
 require_once AI1WM_CONTROLLER_PATH .
 			DIRECTORY_SEPARATOR .
 			'class-ai1wm-status-controller.php';
-
-require_once AI1WM_CONTROLLER_PATH .
-			DIRECTORY_SEPARATOR .
-			'class-ai1wm-resolve-controller.php';
 
 require_once AI1WM_CONTROLLER_PATH .
 			DIRECTORY_SEPARATOR .
@@ -184,11 +229,11 @@ require_once AI1WM_CONTROLLER_PATH .
 
 require_once AI1WM_EXPORT_PATH .
 			DIRECTORY_SEPARATOR .
-			'class-ai1wm-export-compatibility.php';
+			'class-ai1wm-export-init.php';
 
 require_once AI1WM_EXPORT_PATH .
 			DIRECTORY_SEPARATOR .
-			'class-ai1wm-export-resolve.php';
+			'class-ai1wm-export-compatibility.php';
 
 require_once AI1WM_EXPORT_PATH .
 			DIRECTORY_SEPARATOR .
@@ -197,6 +242,10 @@ require_once AI1WM_EXPORT_PATH .
 require_once AI1WM_EXPORT_PATH .
 			DIRECTORY_SEPARATOR .
 			'class-ai1wm-export-config.php';
+
+require_once AI1WM_EXPORT_PATH .
+			DIRECTORY_SEPARATOR .
+			'class-ai1wm-export-config-file.php';
 
 require_once AI1WM_EXPORT_PATH .
 			DIRECTORY_SEPARATOR .
@@ -209,6 +258,10 @@ require_once AI1WM_EXPORT_PATH .
 require_once AI1WM_EXPORT_PATH .
 			DIRECTORY_SEPARATOR .
 			'class-ai1wm-export-database.php';
+
+require_once AI1WM_EXPORT_PATH .
+			DIRECTORY_SEPARATOR .
+			'class-ai1wm-export-database-file.php';
 
 require_once AI1WM_EXPORT_PATH .
 			DIRECTORY_SEPARATOR .
@@ -225,10 +278,6 @@ require_once AI1WM_IMPORT_PATH .
 require_once AI1WM_IMPORT_PATH .
 			DIRECTORY_SEPARATOR .
 			'class-ai1wm-import-upload.php';
-
-require_once AI1WM_IMPORT_PATH .
-			DIRECTORY_SEPARATOR .
-			'class-ai1wm-import-resolve.php';
 
 require_once AI1WM_IMPORT_PATH .
 			DIRECTORY_SEPARATOR .
@@ -252,6 +301,10 @@ require_once AI1WM_IMPORT_PATH .
 
 require_once AI1WM_IMPORT_PATH .
 			DIRECTORY_SEPARATOR .
+			'class-ai1wm-import-mu-plugins.php';
+
+require_once AI1WM_IMPORT_PATH .
+			DIRECTORY_SEPARATOR .
 			'class-ai1wm-import-database.php';
 
 require_once AI1WM_IMPORT_PATH .
@@ -261,18 +314,6 @@ require_once AI1WM_IMPORT_PATH .
 require_once AI1WM_IMPORT_PATH .
 			DIRECTORY_SEPARATOR .
 			'class-ai1wm-import-clean.php';
-
-require_once AI1WM_HTTP_PATH .
-			DIRECTORY_SEPARATOR .
-			'class-ai1wm-http-stream.php';
-
-require_once AI1WM_HTTP_PATH .
-			DIRECTORY_SEPARATOR .
-			'class-ai1wm-http-curl.php';
-
-require_once AI1WM_HTTP_PATH .
-			DIRECTORY_SEPARATOR .
-			'class-ai1wm-http-factory.php';
 
 require_once AI1WM_MODEL_PATH .
 			DIRECTORY_SEPARATOR .
@@ -308,10 +349,6 @@ require_once AI1WM_MODEL_PATH .
 
 require_once AI1WM_MODEL_PATH .
 			DIRECTORY_SEPARATOR .
-			'class-ai1wm-config.php';
-
-require_once AI1WM_MODEL_PATH .
-			DIRECTORY_SEPARATOR .
 			'class-ai1wm-status.php';
 
 require_once AI1WM_MODEL_PATH .
@@ -320,9 +357,12 @@ require_once AI1WM_MODEL_PATH .
 
 require_once AI1WM_MODEL_PATH .
 			DIRECTORY_SEPARATOR .
-			'class-ai1wm-handler.php';
+			'class-ai1wm-message.php';
 
 require_once AI1WM_MODEL_PATH .
 			DIRECTORY_SEPARATOR .
-			'class-ai1wm-http.php';
+			'class-ai1wm-notification.php';
 
+require_once AI1WM_MODEL_PATH .
+			DIRECTORY_SEPARATOR .
+			'class-ai1wm-handler.php';

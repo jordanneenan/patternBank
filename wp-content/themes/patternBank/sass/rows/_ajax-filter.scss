@@ -1,0 +1,41 @@
+.filter_container{
+	margin: 40px 0;
+}
+
+.filter_label{
+	float: left;
+	margin-right: 20px;
+}
+
+.category_filters{
+	margin: 0 -5px;
+	padding: 0;
+	float: left;
+
+	li{
+		float: left;
+		display: block;
+		list-style: none;
+	}
+
+	a{
+		color: $white;
+		background-color: $primary;
+		padding: 5px 10px;
+		margin: 0 4px;
+
+		&:hover{
+			background-color: $darkGrey;
+		}
+
+		&.active{
+			background-color: $secondary;
+		}
+	}
+}
+
+.ajax_pagination{
+	a{
+		display: none;
+	}
+}

@@ -1,0 +1,27 @@
+.article{
+	padding: 0;
+	max-width: 850px;
+
+	img{
+		margin: 40px 0;
+		height: auto;
+		display: block;
+	}
+}
+
+img.aligncenter{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@media only screen and (max-width:$mediaTablet){
+	.article{
+		//padding: 60px 0;
+	}
+}
+
+@media only screen and (max-width:$mediaMobile){
+	.article{
+		//padding: 40px 0;
+	}
+}

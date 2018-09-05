@@ -1,0 +1,31 @@
+.spacing{
+	padding-top: 100px;
+
+	&.medium{
+		padding-top: 60px;
+	}
+
+	&.small{
+		padding-top: 10px;
+	}
+}
+
+@media only screen and (max-width:$mediaTablet){
+	.spacing{
+		padding-top: 80px;
+
+		&.medium{
+			padding-top: 40px;
+		}
+	}
+}
+
+@media only screen and (max-width:$mediaMobile){
+	.spacing{
+		padding-top: 60px;
+
+		&.medium{
+			padding-top: 30px;
+		}
+	}
+}

@@ -4,6 +4,13 @@ A lightweight script to animate scrolling to anchor links. Smooth Scroll works g
 [Download Smooth Scroll](https://github.com/cferdinandi/smooth-scroll/archive/master.zip) / [View the demo](http://cferdinandi.github.io/smooth-scroll/)
 
 
+<hr>
+
+### Want to learn how to write your own vanilla JS plugins? Check out ["The Vanilla JS Guidebook"](https://gomakethings.com/vanilla-js-guidebook/) and level-up as a web developer. 🚀
+
+<hr>
+
+
 
 ## Getting Started
 
@@ -81,7 +88,7 @@ smoothScroll.init({
 	selectorHeader: null, // Selector for fixed headers (must be a valid CSS selector) [optional]
 	speed: 500, // Integer. How fast to complete the scroll in milliseconds
 	easing: 'easeInOutCubic', // Easing pattern to use
-	offset: 0, // Integer. How far to offset the scrolling anchor location in pixels
+	offset: 0, // Integer or Function returning an integer. How far to offset the scrolling anchor location in pixels
 	callback: function ( anchor, toggle ) {} // Function to run after scrolling
 });
 ```

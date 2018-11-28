@@ -20,7 +20,7 @@ if( have_rows('image_copy_row') ):
     		$sideMod = 'alternate';
     	}
 ?>
-				<div class="image_copy cfx <?php echo $sideMod; ?>">
+				<div class="image_copy cfx <?php echo $sideMod; ?>" data-aos="fade-up">
 					<div class="image_wrapper">
 						<div class="image">
 							<img src="<?php the_sub_field('image'); ?>" alt="<?php the_sub_field('title'); ?>">

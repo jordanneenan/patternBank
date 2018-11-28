@@ -8,6 +8,10 @@
 @import 'typography';
 @import 'tools';
 
+/* Vendor */
+@import '../bower_components/aos/dist/aos.css';
+@import '../bower_components/fancybox/dist/jquery.fancybox.min.css';
+
 /* Components */
 @import 'components/header';
 @import 'components/nav';

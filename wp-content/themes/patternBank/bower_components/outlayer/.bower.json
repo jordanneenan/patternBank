@@ -40,12 +40,12 @@
     "isotope"
   ],
   "license": "MIT",
-  "version": "2.1.0",
-  "_release": "2.1.0",
+  "version": "2.1.1",
+  "_release": "2.1.1",
   "_resolution": {
     "type": "version",
-    "tag": "v2.1.0",
-    "commit": "529c61b537638d7bf92323dbfc104b38b928ffe1"
+    "tag": "v2.1.1",
+    "commit": "07ca54fd55ff232aec814768716a5d245a450c41"
   },
   "_source": "https://github.com/metafizzy/outlayer.git",
   "_target": "^2.1.0",

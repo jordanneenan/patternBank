@@ -2,8 +2,8 @@
 Contributors: Backup with UpdraftPlus, DavidAnderson, DNutbourne, aporter, snightingale, bcrodua
 Tags: backup, restore, database backup, wordpress backup, cloud backup, s3, dropbox, google drive, onedrive, ftp, backups
 Requires at least: 3.2
-Tested up to: 4.9
-Stable tag: 1.14.13
+Tested up to: 5.0
+Stable tag: 1.15.5
 Author URI: https://updraftplus.com
 Donate link: https://david.dw-perspective.org.uk/donate
 License: GPLv3 or later
@@ -66,11 +66,23 @@ We've also developed a brilliant new plugin that allows you to backup, update an
 * UpdraftCentral (free, self-hosted)
 * UpdraftCentral Premium (fully-hosted and "ready-to-go", cloud version also available)
 
+= Instantly create a temporary clone of your site (UpdraftClone) =
+
+A temporary clone is an instant copy of this website, running on our servers. You don't need to test or develop on your live site; instead, you can UpdraftClone it, and throw away your clone when done. <a href="https://updraftplus.com/updraftclone/">Learn more about UpdraftClone here.</a>
+
+* Easy: Press the buttons... UpdraftClone does the work.
+* Reliable: Runs on capacity from a leading cloud computing provider.
+* Secure: One VPS (Virtual Private Server) per clone, shared with nobody.
+* Fast: Takes just the time needed to create a backup and send it.
+* Flexible: If you want, test upgrading to a different PHP or WP version.
+
+To create a temporary clone you need: 1) credit in your account and 2) to connect to your account, below. You can buy UpdraftClone tokens <a href="https://updraftplus.com/shop/updraftclone-tokens/">from our shop, here</a>. 
+
 = Are you multi-lingual? Can you translate? =
 
 Are you able to translate UpdraftPlus into another language? Are you ready to help speakers of your language? UpdraftPlus Backup/Restore itself is ready and waiting - the only work needed is the translating. The translation process is easy, and web-based - go here for instructions: <a href="https://updraftplus.com/translate/">https://updraftplus.com/translate/</a>. (Or if you're an expert WordPress translator already, then just pick out the .pot file from the wp-content/plugins/updraftplus/languages/ directory - if you scan for translatable strings manually, then you need to get these functions: _x(), __(), _e(), _ex(), log_e()).
 
-Many thanks to the existing translators - listed at: https://updraftplus.com/translate/
+Many thanks to the existing translators - listed at: <a href="https://updraftplus.com/translate/">https://updraftplus.com/translate/</a>
 
 = More premium plugins =
 
@@ -149,9 +161,83 @@ Unfortunately not; since this is free software, there’s no warranty and no gua
 
 The <a href="https://updraftplus.com/news/">UpdraftPlus backup blog</a> is the best place to learn in more detail about any important changes.
 
-N.B. Paid versions of UpdraftPlus Backup / Restore have a version number which is 1 higher in the first digit, and has an extra component on the end, but the changelog below still applies. i.e. changes listed for 1.14.9 of the free version correspond to changes made in 2.14.9.x of the paid version.
+N.B. Paid versions of UpdraftPlus Backup / Restore have a version number which is 1 higher in the first digit, and has an extra component on the end, but the changelog below still applies. i.e. changes listed for 1.15.5.x of the free version correspond to changes made in 2.15.5.x of the paid version.
 
-= 1.14.13 - 15/August/2018 =
+= 1.15.5 - 19/Nov/2018 =
+
+* TWEAK: Include the backup set ID in clone ready state file
+* TWEAK: For Premium users with grand-fathered lifetime updates (i.e. purchased before August 2013), a regression had caused support entitlement expiries to no longer be notified
+* TWEAK: For Premium users with who have downgraded from unlimited licences to another package, a licence expiry message could show when in fact the real situation was that they just needed to specifically allocate a licence to the site. The relevant message has been adjusted to improve this.
+* TWEAK: Track "more files" incremental backup locations
+* TWEAK: Don't show individual add-ons that have not been bought in the account add-ons page if the user has Premium.
+* TWEAK: Include the raw updates check response information in the internal/advanced dump
+* TWEAK: Added the UpdraftClone video
+
+= 1.15.3 - 29/Oct/2018 =
+
+* FEATURE: UpdraftPlus now has an option to auto-update
+* FEATURE: Azure for Government endpoint support (Premium)
+* FIX: SSL verification settings were not allowing verification to be turned off for generic S3 storage
+* FIX: In some situations in which a user had defined UTF8 as their character set but WordPress was using UTF8MB4, UpdraftPlus was not detecting this
+* FIX: Prevent particular a SQL text pattern wrongly triggering detection of database features when it is within content
+* TWEAK: Marked as supporting WordPress 5.0
+* TWEAK: Automatically re-scan for presence of database backup after restoring it, to prevent confusion over its status
+* TWEAK: Change logic that controls whether the minified or full JavaScript is used
+* TWEAK: Improve Settings tab UI on mobile
+* TWEAK: Improve UpdraftClone UI
+* TWEAK: Improve UpdraftClone temporary page UI
+* TWEAK: Change method used to record the MySQL version to deal with how MariaDB can report when using a non-MariaDB client library (see: https://github.com/joomla/joomla-cms/issues/9062)
+* TWEAK: Replace Base64 encoded logo by image file
+* TWEAK: Hide guided tour on UpdraftClone
+* TWEAK: Fixed broken automatic backup modal layout
+* TWEAK: Auto rescan after restoring the remote database
+* TWEAK: Explicitly set the backup history option to not autoload, as it can get non-trivial in size
+* TWEAK: Improve UI of excluding things from the backup
+* TWEAK: Prevent a possible PHP debug notice in methods/backup-module.php
+* TWEAK: Show progress in browser view port instead of modal dialog when we delete the backup(s).
+* TWEAK: Added a --db-dummy-restore option to WP-CLI which will run a dummy restore of the database (under an unused prefix) and then drop the tables after it finishes. This option can be useful for testing.
+* TWEAK: Update the UpdraftClone UI when site information becomes available
+* TWEAK: Curl errors when interacting with Backblaze B2 will now be passed up for easier debugging
+* TWEAK: Re-factor add-on remote storage credential testing to make passing debugging information easier
+* TWEAK: Implement non-default SSL options with Backblaze B2 (previously the defaults were always used)
+* TWEAK: UpdraftClone: redirect to admin page after using the auto login link
+* TWEAK: Improve internal more files backup location tracking
+* TWEAK: Send a single request to download a backup set not for each file entity
+* TWEAK: Fix a DOM element whereby multiple nonces had the same id
+* TWEAK: Automatically build the more files backup location tracking on local rescan
+* TWEAK: Refactor the remote storage logging code in Onedrive module
+
+= 1.15.2 - 19/Sep/2018 =
+
+* FIX: Asking the tour to cancel on the plugins page did not work
+* FIX: an issue where some jobdata did not get set which resulted in the backup email not being sent
+* FIX: a regression whereby network-activated plugins could get deactivated on multisites when restoring
+* FIX: When database encryption was active, UpdraftClone would fail
+* TWEAK: There is now a 'Rescan remote storage - log results to console' link in 'Advanced Tools' to aid with debugging
+* TWEAK: Fixes Migrate / clone tab contents showing on the Advanced tools tab
+* TWEAK: Attempt to catch, work-around and log when the backup history cannot be saved due to too long a history relative to the MySQL server's maximum packet size
+* TWEAK: Re-factor and introduce the UpdraftPlus_Storage_Methods_Interface class
+* TWEAK: Introduce the UPDRAFTPLUS_ENABLE_TOUR constant for power users; set it to false as part of your automated WP installation process (or manually) if you wish to disable all tour functionality.
+
+= 1.15.0 - 12/Sep/2018 =
+
+* FEATURE: Introducing UpdraftClone. Create a live copy of your site with a button press. Great for testing changes, testing updates (e.g. WordPress core, plugins, PHP versions) and anything else you can think of. More information: https://updraftplus.com/updraftclone/
+* FIX: Fix the logic for claiming and activating licences/add-ons.
+* FIX: Fixed OneDrive for Business Germany authentication tenant issue
+* TWEAK: WP-CLI - use dash (-) instead of underscore (_) to separate words, in order to match WP-CLI standards. 
+* TWEAK: Adds close_browser_connection capability for servers using phpfpm
+* TWEAK: Change multiple backups selection and actions UI
+* TWEAK: Prevent PHP debug message on backup from UpdraftCentral when processing the service list
+* TWEAK: Improves manual backup feedback
+* TWEAK: Fix an out-of-date 'lost password' link
+* TWEAK: Add filter updraftplus_disk_space_check to allow over-riding disk space check result
+* TWEAK: Re-factor some of the restore code to enable future enhancements
+* TWEAK: In the case of an 'always keep' backup, it was possible for the wrong log message to be logged concerning the reason for it being kept
+* TWEAK: Add log warning and WP Admin notice regarding DreamObjects objects-us-west-1.dream.io endpoint shutting down
+* TWEAK: Refactor the remote storage logging code
+* TWEAK: Clean up some confusing UI when dealing with remote send backups
+
+= 1.14.13 - 15/Aug/2018 =
 
 * FEATURE: WP-CLI - add a 'get_latest_full_backup' command
 * FIX: An issue when deleting multiple backups could result in a backup set not found error
@@ -169,9 +255,12 @@ N.B. Paid versions of UpdraftPlus Backup / Restore have a version number which i
 * TWEAK: Tweaked downwards the minimum time in the future for rescheduling a resumption
 * TWEAK: Deal with a possible issue in automatic collation selection in restoration when all character sets are supported and a collation is not supported
 * TWEAK: Replace absolute URLs in place of relative URLs in anchor links
+* TWEAK: Update error code URL for binary zip errors
+* FEATURE: Added OneDrive for Business Germany compatibility
 
-= 1.14.12 - 17/July/2018 =
+= 1.14.12 - 17/Jul/2018 =
 
+* FEATURE: Added Plugin guided tour for new users
 * FEATURE: Added UpdraftCentral's theme management module handler
 * FEATURE: User can mark any backup as "do not delete", and it will then not be deleted even when retention limits are hit
 * FEATURE: WP-CLI - add a 'restore' command
@@ -590,5 +679,5 @@ Furthermore, reliance upon any non-English translation is at your own risk. Updr
 We recognise and thank the following for code and/or libraries used and/or modified under the terms of their open source licences; see: https://updraftplus.com/acknowledgements/
 
 == Upgrade Notice ==
-* 1.14.13 : A new "Backup / Restore" tab and a new WP-CLI get_latest_full_backup command. Many tweaks for convenience and small fixes. A recommended update for all.
+* 1.15.5: Various small/minor improvements. A recommended update for all.
 

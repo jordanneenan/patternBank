@@ -8,7 +8,7 @@
 	}
 ?>
 
-<div class="row form_row">
+<div class="row form_row" data-aos="fade-up">
 	<div class="content_container">
 		<div class="copy">
 <?php

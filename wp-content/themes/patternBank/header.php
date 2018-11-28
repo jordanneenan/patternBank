@@ -23,23 +23,27 @@
         <link rel='stylesheet' id='Main stylesheet-css'  href='<?php echo get_template_directory_uri(); ?>/css/style.css' type='text/css' />
         <link rel='stylesheet' href='<?php echo get_template_directory_uri(); ?>/bower_components/slick-carousel/slick/slick.css' type='text/css' />
 
-        <!--[if lt IE 9]>
-            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js""></script>
-        <![endif]-->
-        <!--[if gte IE 9]><!-->
-            <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-        <!--<![endif]-->
-        <script>
-            if (!window.jQuery) {
-                document.write('<?php echo get_template_directory_uri(); ?>/js/vendor/jquery-1.11.3.min.js');
-            }
-        </script>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <!-- Animation libraries -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.3/ScrollMagic.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.11.4/TweenMax.min.js"></script>
+        
+        <script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/vendor/animation.gsap.js'></script>
         
         <script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/min/main-min.js'></script>
 
         <!--[if lt IE 9]>
             <script src="http://html5shiv-printshiv.googlecode.com/svn/trunk/html5shiv-printshiv.js"></script>
         <![endif]-->
+
+        <?php
+            //this fixes the initspinner error with gravity forms
+            gravity_form_enqueue_scripts('form_id', 'ajax');
+            gravity_form_enqueue_scripts(4, true);
+        ?>
 
     </head>
     <body <?php body_class(); ?>>

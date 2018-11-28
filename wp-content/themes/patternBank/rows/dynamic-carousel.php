@@ -14,7 +14,7 @@
 	<div class="row">
 
 		<!-- Carousel settings - left_align will align the content left -->
-		<div class="carousel <?php echo $classes; ?>">
+		<div class="carousel <?php echo $classes; ?>" data-aos="fade-up">
 
 <?php
  	// loop through the rows of data

@@ -12,7 +12,7 @@ function vAlign(){
 }
 
 //only fire if the window width changes (iPad bug fix)
-$(window).load(function(){
+$(window).on("load", function (e) {
   w = $( window ).width();
   vAlign();
 });

@@ -33,7 +33,7 @@
 
 			<div class="banner_container">
 				<div class="banner_align">
-					<div class="banner_content">
+					<div class="banner_content" data-aos="fade-up">
 						<?php if($title){ ?>
 							<h1><?php echo $title; ?></h1>
 						<?php } ?>

@@ -1,6 +1,6 @@
 var w = false;
 
-$(window).load(function(){
+$(window).on("load", function (e) {
 	fixFooter();
 
 	w = $( window ).width();

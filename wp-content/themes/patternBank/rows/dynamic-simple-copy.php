@@ -11,7 +11,7 @@
 	}
 ?>
 
-<div class="row simple_copy" <?php echo $styleBg; ?>>
+<div class="row simple_copy" data-aos="fade-up" <?php echo $styleBg; ?>>
 	<div class="content_container" <?php echo $styleCopy; ?>>
 		<p>
 		<?php the_sub_field('copy'); ?>
